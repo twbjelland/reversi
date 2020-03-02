@@ -1,0 +1,25 @@
+{
+  "name": "reversi",
+  "version": "1.0.0",
+  "description": "This is the game of reversi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twbjelland/reversi.git"
+  },
+  "keywords": [
+    "reversi"
+  ],
+  "author": "Talia Bjelland",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/twbjelland/reversi/issues"
+  },
+  "homepage": "https://github.com/twbjelland/reversi#readme",
+  "dependencies": {
+    "node-static": "^0.7.11"
+  }
+}
