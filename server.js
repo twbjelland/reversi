@@ -230,7 +230,7 @@ io.sockets.on('connection', function (socket) {
 
 				var message = payload.message;
 				if(('undefined' === typeof message) || !message){
-					var error_message = 'send_message didn\'t specify a username, command aborted';
+					var error_message = 'send_message didn\'t specify a message, command aborted';
 					log(error_message);
 					socket.emit('send_message_response', {
 						result: 'fail',

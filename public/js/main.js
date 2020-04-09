@@ -203,9 +203,9 @@ socket.on('game_start_response', function(payload){
 function send_message(){
   var payload = {};
   payload.room = chat_room;
+  payload.message = $('#send_message_holder').val();
   console.log('*** Client Log Message: \'send_message\' payload: '+JSON.stringify(payload));
   socket.emit('send_message', payload);
-  $('#send_message_holder').val();
 }
 
 socket.on('send_message_response', function(payload){
