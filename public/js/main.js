@@ -261,7 +261,7 @@ $(function(){
   console.log('*** Client Log Message: \'join_room\' payload: '+JSON.stringify(payload));
   socket.emit('join_room', payload);
 
-  $('#quit').append('<a href="lobby.html?username='+username+'" class="btn btn-danger btn-default active" role="button" aria-pressed="true">Quit</a>');
+  $('#quit').append('<a href="lobby.html?username='+username+'" class="btn btn-primary btn-default active" role="button" aria-pressed="true">Quit</a>');
 });
 
 
@@ -309,8 +309,18 @@ socket.on('game_update',function(payload){
     window.location.href = 'lobby.html?username='+username;
   }
 
-  $('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3');
-  $('#my_color').append('<h4> It is '+payload.game.whose_turn+'\'s turn. Elapsed time <span id="elapsed"></span></h4>');
+//below is my new code
+if(my_color === 'white'){
+  $('#my_color').html('<h3 id="my_color">My color: </h3><img src="assets/images/XXEMPTYTOWHITE.gif">');
+} else {
+  $('#my_color').html('<h3 id="my_color">My color: </h3><img src="assets/images/XXEMPTYTOBLUE.gif">');
+}
+  /*$('#my_color').html('<h3 id="my_color">I am '+my_color+'</h3');*/
+if(payload.game.whose_turn === 'black'){
+  $('#my_time').html('<h3> Waiting for blue... <span id="elapsed"></span></h3>');
+}
+else
+  $('#my_time').html('<h3> Waiting for '+payload.game.whose_turn+'... <span id="elapsed"></span></h3>');
 
   clearInterval(interval_timer);
   interval_timer = setInterval(function(last_time){
@@ -415,6 +425,10 @@ socket.on('game_over',function(payload){
   }
 
   /*Jump to a new page*/
-  $('#game_over').html('<h1>Game Over</h1><h2>'+payload.who_won+' won!</h2>');
-  $('#game_over').append('<a href="lobby.html?username='+username+'" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Return to the lobby</a>');
+  if(payload.who_won === 'black'){
+    $('#game_over').html('<h1>Game over</h1><h2> Congratulations blue!</h2>');
+  } else {
+  $('#game_over').html('<h1>Game over</h1><h2> Congratulations '+payload.who_won+'!</h2>');
+  }
+  $('#game_over').append('<a href="lobby.html?username='+username+'" class="btn btn-light btn-lg active" role="button" aria-pressed="true">Return to the lobby</a>');
 });
